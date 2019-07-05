@@ -1,0 +1,186 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Loan API",
+		"_postman_id": "d06349e5-290b-0264-2b72-105f1c19f2ca",
+		"description": "Endpoints for loan API request",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create User",
+			"request": {
+				"url": "localhost:4000/api/user",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "firstname",
+							"value": "James",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "lastname",
+							"value": "Buchi",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "test",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "me@loan.com",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "state",
+							"value": "Delta",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "country",
+							"value": "Nigeria",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "08021144558",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": "Creates a user and returns the details"
+			},
+			"response": []
+		},
+		{
+			"name": "Login.",
+			"request": {
+				"url": "localhost:4000/api/login",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "me@loan.com",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "test",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": "Login request returning a token"
+			},
+			"response": []
+		},
+		{
+			"name": "Auth: List Loans",
+			"request": {
+				"url": "localhost:4000/api/loans",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer: {auth.token}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "Get token from Login request and change the authorization header accordingly"
+			},
+			"response": []
+		},
+		{
+			"name": "Auth: Loan Application",
+			"request": {
+				"url": "localhost:4000/api/loans",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer: {auth token}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "loanId",
+							"value": "1",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "loan_Name",
+							"value": "Kia Kia",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "amount",
+							"value": "5000",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "userId",
+							"value": "3",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "loan_date_start",
+							"value": "03-01-2019",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "loan_date_end",
+							"value": "6-30-2019",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": "Apply for loan with this request also add the authorization header."
+			},
+			"response": []
+		}
+	]
+}
