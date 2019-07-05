@@ -1,0 +1,33 @@
+{
+  "name": "loan-application-api",
+  "version": "1.0.0",
+  "description": "RESTful API for a Loan App",
+  "main": "index.js",
+  "scripts": {
+    "test1": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "dev": "cross-env NODE_ENV=development nodemon server.js"
+  },
+  "keywords": [
+    "Loan",
+    "API",
+    "money",
+    "borrow"
+  ],
+  "author": "Omafovbe",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1"
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0",
+    "jest": "^24.8.0",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.19.1",
+    "supertest": "^4.0.2"
+  }
+}
