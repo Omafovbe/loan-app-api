@@ -5,7 +5,6 @@ const salts = 10;
 const utils = require('./utils.js');
 //Define our data
 let id = 0;
-let alLoans=[];
 
 module.exports = {
 	createUser,
@@ -29,10 +28,13 @@ async function createUser(reqParam){
 		//Hash the password of user
 		passwordHash = bcrypt.hashSync(reqParam.password, salts);
 
+		//Assign the data with the hashed password to user_model
+		Object.assign(utils.user_model, reqParam);
+
 		//Save the user bio-data
 		utils.users.push({id, ...reqParam, hash_password: passwordHash});
 		
-		//Extract user without the password
+		//Extract user without the password and hash_password
 		const {hash_password, password, ...userWithoutPassword} = utils.user_model;
 		
 		//return user with ID
@@ -40,9 +42,10 @@ async function createUser(reqParam){
 	}
 };
 
+// Authenticate user during logins
 async function authenticate({email, password}){
 	//find user with email and compare password
-	const user = utils.users.find(user => user.email === email && bcrypt.compare(password, user.hash_password));
+	const user = utils.users.find(user => user.email === email && bcrypt.compareSync(password, user.hash_password));
 
 	//if user exist, sign user and create a token with JWT
 	if(user) {
@@ -52,16 +55,19 @@ async function authenticate({email, password}){
 	}
 };
 
+//Gets the user by id used for authentication
 async function getById(id) {
 	console.log(id);
     return utils.users.find(user => user.id === id);
 
 };
 
+//Display all available loans
 async function availableLoan(){
 	return utils.loanData;
 };
 
+//Application for loan
 async function applyLoan(reqParam) {
 	const appliedLoans = utils.loanApplied.filter(loan => loan.userId === reqParam.userId)
 							.map(loans => stillRunning = compareDate(reqParam.loan_date_start, loans.loan_date_start, loans.loan_date_end))
@@ -83,7 +89,7 @@ async function applyLoan(reqParam) {
 	
 	
 }
-
+ //Function to compare current loan application date to other loans applied for
 function compareDate(current_startdate, prev_startDate, prev_endDate) {
 	//Date should be in mm-dd-yy
 	current_startdate = new Date(current_startdate);

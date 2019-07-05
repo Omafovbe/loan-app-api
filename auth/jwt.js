@@ -6,7 +6,6 @@ module.exports = protectedRoute;
 
 //Function to authenticate routes
 
-
 function protectedRoute (req, res, next) {
     if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer:') {
         const authHeader = req.headers.authorization.split(' ')[1];
@@ -18,5 +17,5 @@ function protectedRoute (req, res, next) {
         return next();
     }
 
-    return res.status(401).json({message: 'Unauthorizated'});
+    return res.status(401).json({message: 'UnauthorizedError'});
   };

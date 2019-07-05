@@ -5,9 +5,8 @@ const secured = require('../auth/jwt');
 
 // routes
 router.post('/login', authenticate);
-//router.get('/user', loanAll);
 router.post('/user', createUser);
-router.post('/loans', applyLoan);
+router.post('/loans',secured, applyLoan);
 router.get('/loans', secured, availableLoan);
 
 
