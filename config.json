@@ -1,3 +1,4 @@
 {
-	"secret": "SECRET KEY TO SIGN AND VERIFY OUR LOAN APP"
+	"secret": "SECRET KEY TO SIGN AND VERIFY OUR LOAN APP",
+	"salts": 10
 }

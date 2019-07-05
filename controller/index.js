@@ -1,7 +1,6 @@
 const config = require('../config.json');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const salts = 10;
 const utils = require('./utils.js');
 //Define our data
 let id = 0;
@@ -26,7 +25,7 @@ async function createUser(reqParam){
 		id += 1;
 
 		//Hash the password of user
-		passwordHash = bcrypt.hashSync(reqParam.password, salts);
+		passwordHash = bcrypt.hashSync(reqParam.password, config.salts);
 
 		//Assign the data with the hashed password to user_model
 		Object.assign(utils.user_model, reqParam);
