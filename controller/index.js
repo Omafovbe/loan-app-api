@@ -16,7 +16,7 @@ module.exports = {
 async function createUser(reqParam){
 	
 	//Checks if a user exist with the email
-	const user = utils.users.find(u => u.email === reqParam.email );
+	const user = await utils.users.find(u => u.email === reqParam.email );
 
 	if(user){
 		throw ({message: `User with email: ${reqParam.email} exist`});
@@ -44,7 +44,7 @@ async function createUser(reqParam){
 // Authenticate user during logins
 async function authenticate({email, password}){
 	//find user with email and compare password
-	const user = utils.users.find(user => user.email === email && bcrypt.compareSync(password, user.hash_password));
+	const user = await utils.users.find(user => user.email === email && bcrypt.compareSync(password, user.hash_password));
 
 	//if user exist, sign user and create a token with JWT
 	if(user) {
@@ -57,18 +57,18 @@ async function authenticate({email, password}){
 //Gets the user by id used for authentication
 async function getById(id) {
 	console.log(id);
-    return utils.users.find(user => user.id === id);
+    return await utils.users.find(user => user.id === id);
 
 };
 
 //Display all available loans
 async function availableLoan(){
-	return utils.loanData;
+	return await utils.loanData;
 };
 
 //Application for loan
 async function applyLoan(reqParam) {
-	const appliedLoans = utils.loanApplied.filter(loan => loan.userId === reqParam.userId)
+	const appliedLoans = await utils.loanApplied.filter(loan => loan.userId === reqParam.userId)
 							.map(loans => stillRunning = compareDate(reqParam.loan_date_start, loans.loan_date_start, loans.loan_date_end))
 							.reduce((acc, val) => acc || val, false);
 	console.log(appliedLoans);
@@ -81,7 +81,7 @@ async function applyLoan(reqParam) {
 		utils.loanApplied.push({...reqParam, date_applied: Date.now()});
 		utils.loanApply_model = [];
 		
-		const allAppliedLoans = utils.loanApplied.filter(loan => loan.userId === reqParam.userId)
+		const allAppliedLoans = await utils.loanApplied.filter(loan => loan.userId === reqParam.userId)
 		
 		return {message: "Application successful", allAppliedLoans }
 	};
